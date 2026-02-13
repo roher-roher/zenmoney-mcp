@@ -24,13 +24,12 @@ This server requires a ZenMoney OAuth2 access token. You can obtain one from [Ze
 
 Alternatively, register your own OAuth2 application via the [ZenMoney API](https://github.com/zenmoney/ZenPlugins/wiki/ZenMoney-API).
 
-## Installation
+## Quick Start
+
+No installation required — run directly with `npx`:
 
 ```bash
-git clone <repository-url>
-cd zenmoney-mcp
-npm install
-npm run build
+ZENMONEY_TOKEN=your-token npx -y @roher/zenmoney-mcp
 ```
 
 ## Configuration
@@ -43,8 +42,8 @@ Add to your `claude_desktop_config.json`:
 {
   "mcpServers": {
     "zenmoney": {
-      "command": "node",
-      "args": ["/absolute/path/to/zenmoney-mcp/build/index.js"],
+      "command": "npx",
+      "args": ["-y", "@roher/zenmoney-mcp"],
       "env": {
         "ZENMONEY_TOKEN": "your-token-here"
       }
@@ -60,8 +59,8 @@ Add to `~/.claude/settings.json` under `mcpServers`:
 ```json
 {
   "zenmoney": {
-    "command": "node",
-    "args": ["/absolute/path/to/zenmoney-mcp/build/index.js"],
+    "command": "npx",
+    "args": ["-y", "@roher/zenmoney-mcp"],
     "env": {
       "ZENMONEY_TOKEN": "your-token-here"
     }
@@ -79,8 +78,8 @@ Add to your `.vscode/mcp.json`:
 {
   "servers": {
     "zenmoney": {
-      "command": "node",
-      "args": ["/absolute/path/to/zenmoney-mcp/build/index.js"],
+      "command": "npx",
+      "args": ["-y", "@roher/zenmoney-mcp"],
       "env": {
         "ZENMONEY_TOKEN": "your-token-here"
       }
@@ -88,6 +87,17 @@ Add to your `.vscode/mcp.json`:
   }
 }
 ```
+
+### Building from Source
+
+```bash
+git clone https://github.com/roher-roher/zenmoney-mcp.git
+cd zenmoney-mcp
+npm install
+npm run build
+```
+
+Then use `node /path/to/zenmoney-mcp/build/index.js` instead of `npx` in the configurations above.
 
 ## Tools
 
@@ -141,14 +151,6 @@ Returns planned transaction instances generated from reminders. Filter by:
 The server uses the ZenMoney `/v8/diff/` API endpoint — the only read mechanism available. On the first tool call, it performs a full sync (`serverTimestamp: 0`) and caches all data in memory. Subsequent calls serve from cache. Use `refresh_data` to force a re-fetch.
 
 All internal IDs are automatically resolved to human-readable values: account names, currency codes (e.g. `RUB`, `USD`), tag titles, and merchant names.
-
-## Build
-
-```bash
-npm run build
-```
-
-Output is written to the `build/` directory.
 
 ## License
 

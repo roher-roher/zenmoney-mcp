@@ -1,16 +1,33 @@
 {
-  "name": "zenmoney-mcp",
+  "name": "@roher/zenmoney-mcp",
   "version": "1.0.0",
   "description": "MCP server for ZenMoney API (read-only)",
   "main": "build/index.js",
+  "bin": {
+    "zenmoney-mcp": "build/index.js"
+  },
+  "files": [
+    "build"
+  ],
   "scripts": {
     "build": "tsc",
-    "start": "node build/index.js"
+    "prepublishOnly": "npm run build"
   },
-  "keywords": ["mcp", "zenmoney"],
-  "author": "",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "zenmoney",
+    "finance",
+    "model-context-protocol"
+  ],
+  "author": "roher",
   "license": "MIT",
   "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roher-roher/zenmoney-mcp.git"
+  },
+  "homepage": "https://github.com/roher-roher/zenmoney-mcp",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",
     "zod": "^4.3.6"
