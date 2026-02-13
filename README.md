@@ -148,9 +148,16 @@ Returns planned transaction instances generated from reminders. Filter by:
 
 ## How It Works
 
-The server uses the ZenMoney `/v8/diff/` API endpoint — the only read mechanism available. On the first tool call, it performs a full sync (`serverTimestamp: 0`) and caches all data in memory. Subsequent calls serve from cache. Use `refresh_data` to force a re-fetch.
+The server uses the ZenMoney `/v8/diff/` API endpoint — the only read mechanism available.
 
-All internal IDs are automatically resolved to human-readable values: account names, currency codes (e.g. `RUB`, `USD`), tag titles, and merchant names.
+**Caching and sync:**
+
+- **First run** — performs a full sync (`serverTimestamp: 0`) and saves the result to disk at `~/.zenmoney-mcp/cache.json`
+- **Subsequent runs** — loads cached data from disk and fetches only changes since the last sync (incremental diff), which is significantly faster
+- **Within a session** — all tool calls are served from in-memory cache with no additional API requests
+- **`refresh_data`** — clears both disk and in-memory cache; the next tool call will perform a full sync
+
+**ID resolution:** all internal IDs are automatically resolved to human-readable values — account names, currency codes (e.g. `RUB`, `USD`), tag titles, and merchant names.
 
 ## License
 
