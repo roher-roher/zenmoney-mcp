@@ -9,7 +9,7 @@
   },
   "keywords": ["mcp", "zenmoney"],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",

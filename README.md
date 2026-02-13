@@ -152,4 +152,4 @@ Output is written to the `build/` directory.
 
 ## License
 
-ISC
+MIT
